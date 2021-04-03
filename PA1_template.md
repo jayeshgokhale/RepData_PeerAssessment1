@@ -73,11 +73,13 @@ total.na <- length(which(is.na(activity$steps)))
 ```
 Total Number of Missing Values = **2304**
 
+We are creating a data frame out of the interval wise mean vector to be merged with the activity data frame later.
 
 ```r
 df.im <- data.frame(interval = names(intervalwise.mean),intervalmean = intervalwise.mean)
 ```
 
+This activity vector is now merged with the above created interval wise mean data frame. Since only one column is common viz. interval, merge will be done on that. Thereafter for all the NA values, steps column will be replaced with interval mean.
 
 ```r
 activity.imputed <- merge(activity,df.im)

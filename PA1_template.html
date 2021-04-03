@@ -216,7 +216,9 @@ max.interval.id &lt;- names(which(intervalwise.mean==max.intervalwise.mean))</co
 <p>We will create a new dataset named activity.imputed.</p>
 <pre class="r"><code>total.na &lt;- length(which(is.na(activity$steps)))</code></pre>
 <p>Total Number of Missing Values = <strong>2304</strong></p>
+<p>We are creating a data frame out of the interval wise mean vector to be merged with the activity data frame later.</p>
 <pre class="r"><code>df.im &lt;- data.frame(interval = names(intervalwise.mean),intervalmean = intervalwise.mean)</code></pre>
+<p>This activity vector is now merged with the above created interval wise mean data frame. Since only one column is common viz. interval, merge will be done on that. Thereafter for all the NA values, steps column will be replaced with interval mean.</p>
 <pre class="r"><code>activity.imputed &lt;- merge(activity,df.im)
 activity.imputed[is.na(activity.imputed$steps),]$steps &lt;- activity.imputed[is.na(activity.imputed$steps),]$intervalmean
 total.na.imputed &lt;- length(which(is.na(activity.imputed$steps)))</code></pre>
